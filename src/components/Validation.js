@@ -1,53 +1,46 @@
-export function letterValue(string) {
-  let toLowerCase = string.toLowerCase();
-  const let_num = {
-    a: 10,
-    b: 11,
-    c: 12,
-    d: 13,
-    e: 14,
-    f: 15,
-    g: 16,
-    h: 17,
-    i: 18,
-    j: 19,
-    k: 20,
-    l: 21,
-    m: 22,
-    n: 23,
-    o: 24,
-    p: 25,
-    q: 26,
-    r: 27,
-    s: 28,
-    t: 29,
-    u: 30,
-    v: 31,
-    w: 32,
-    x: 33,
-    y: 34,
-    z: 35,
+export function checkIbanNumbers(inputIban) {
+  const ibanCountryLength = {
+    LI: 21,
   };
 
-  if (toLowerCase.length === 1) {
-    return let_num[toLowerCase] || "";
+  let iban = String(inputIban)
+    .toUpperCase() //change to upper case
+    .replace(/[^A-Z0-9]/g, ""); //remove anything that is not a letter or number
+  //console.log("iban:", iban);
+  let ibanMatch = iban.match(/^([A-Z]{2})(\d{2})([A-Z\d]+)$/); //check if iban has this format
+  //console.log("ibanMatch:", ibanMatch);
+  //console.log(ibanCountryLength[ibanMatch[1]]);
+
+  // @ts-ignore
+  if (!ibanMatch || iban.length !== ibanCountryLength[ibanMatch[1]]) {
+    return alert("not a valid IBAN");
   } else {
-    return toLowerCase.split("").map(letterValue);
+    // // @ts-ignore
+    let reOrderIban = (ibanMatch[3] + ibanMatch[1] + ibanMatch[2]).replace(
+      /[A-Z]/g,
+      // @ts-ignore
+      function (letter) {
+        return letter.charCodeAt(0) - 55;
+      }
+    );
+    //console.log("reOrderIban:", reOrderIban);
+    return modulo97(reOrderIban);
   }
 }
-//console.log(letterValue("LI"));
+//console.log(checkIbanNumbers("LI21 0881 0000 2324 013A A"));
 
-// function alphab(letter) {
-//   const result =
-//     letter.charCodeAt(0) - (letter === letter.toLowerCase() ? 87 : 55);
-//   if (letter.length === 1) {
-//     return result;
-//   }
-// }
-// console.log(alphab("A"));
+function modulo97(string) {
+  let remainder = string;
 
-export function reOrderIban(iban) {
-  const countryCodeDigit = iban.slice(0, 4);
-  const bankCodeAccNumber = iban.slice(4, iban.length);
-  return bankCodeAccNumber + countryCodeDigit;
+  while (remainder.length > 2) {
+    let block = remainder.slice(0, 9);
+    remainder = (parseInt(block, 10) % 97) + remainder.slice(block.length);
+  }
+  let checkSum = parseInt(remainder, 10) % 97;
+
+  if (checkSum === null) {
+    alert("Not a valid IBAN");
+  } else {
+    alert("Is a valid IBAN");
+  }
 }

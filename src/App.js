@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { letterValue, reOrderIban } from "./components/Validation";
+import { checkIbanNumbers } from "./components/Validation";
 
 function App() {
   const [iban, setIban] = useState("");
