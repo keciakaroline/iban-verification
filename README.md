@@ -1,6 +1,6 @@
 # IBAN VERIFICATION FOR LIECHTENSTEIN
 
-Have a look: 
+Have a look: https://iban-verification-liechtenstein.netlify.app/
 
 ### Techs used
 <p align="left">
