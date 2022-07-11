@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="container mx-auto h-fit rounded max-w-screen-sm m-40 p-28 bg-gradient-to-br from-cyan-50 to-sky-200 shadow-lg shadow-gray-400">
       <div className="text-center mb-14 text-2xl font-semibold tracking-wide underline">
-        <h1>IBAN Verification</h1>
+        <h1>IBAN Verification for Liechtenstein</h1>
       </div>
       <div className="text-center text-lg flex flex-col">
         <input
