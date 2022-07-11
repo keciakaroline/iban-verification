@@ -1,0 +1,8 @@
+@media (max-width: 400px) {
+  .container {
+    width: auto;
+    padding: 60px 30px 60px 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
