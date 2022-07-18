@@ -14,7 +14,6 @@ export function checkIbanNumbers(inputIban) {
   } else {
     let reOrderIban = (ibanMatch[3] + ibanMatch[1] + ibanMatch[2]).replace(
       /[A-Z]/g,
-
       function (letter) {
         return letter.charCodeAt(0) - 55;
       }
